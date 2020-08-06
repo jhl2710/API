@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+   例如namespace="com.szh.mapper.personMapper"就是com.szh.mapper(包名)+personMapper(personMapper.xml文件去除后缀) -->
+<mapper namespace="com.fh.mapper.AreaMapper">
+
+    <select id="queryAreaNameByIds" parameterType="java.lang.String" resultType="java.lang.String">
+      select areaName from shop_area where areaId in ( ${areaIds})
+    </select>
+
+    <!--新增-->
+    <insert id="addVip" parameterType="com.fh.model.po.Vip">
+        insert into shop_vip (areaId,vipName,imgpath,num,brithday) values (#{areaId},#{vipName},#{imgpath},#{num},#{brithday})
+    </insert>
+
+
+
+    <!--注册验证vip名是否存在-->
+    <select id="queryByName" parameterType="java.lang.String" resultType="com.fh.model.po.Vip">
+        select areaId,vipName,imgpath,num,brithday,id from shop_vip where vipName=#{vipName}
+    </select>
+
+</mapper>
